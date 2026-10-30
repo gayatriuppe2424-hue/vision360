@@ -33,6 +33,26 @@ except ImportError:
     Image, ImageTk = None, None
 
 # ──────────────────────────────────────────────────────────────────────────────
+#  Path helpers (work from source AND when packaged with PyInstaller)
+# ──────────────────────────────────────────────────────────────────────────────
+def resource_path(*parts):
+    """Read-only bundled files (model, images, gif)."""
+    base = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    return Path(base, *parts)
+
+def user_data_dir():
+    """Writable per-user folder for profiles (APPDATA on Windows)."""
+    if platform.system() == "Windows":
+        root = os.environ.get("APPDATA") or str(Path.home())
+    elif platform.system() == "Darwin":
+        root = str(Path.home() / "Library" / "Application Support")
+    else:
+        root = os.environ.get("XDG_DATA_HOME") or str(Path.home() / ".local" / "share")
+    d = Path(root) / "Vision360"
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+# ──────────────────────────────────────────────────────────────────────────────
 #  Global Theme & Colors (Matching Target Mockup)
 # ──────────────────────────────────────────────────────────────────────────────
 ctk.set_appearance_mode("dark")
@@ -341,7 +361,7 @@ class BreakGatekeeper(ctk.CTkToplevel):
     def _load_gif(self):
         """Loads the cat_gatekeeper GIF robustly using native frame seeking."""
         try:
-            base_dir = Path(__file__).resolve().parent
+            base_dir = resource_path()
             
             # Check for multiple possible extensions/names
             possible_names = ["cat_gatekeeper.gif", "cat_gatekeeper"]
@@ -396,7 +416,7 @@ class BreakGatekeeper(ctk.CTkToplevel):
     def _load_gif(self):
         """Loads the cat_gatekeeper GIF robustly using native frame seeking."""
         try:
-            base_dir = Path(__file__).resolve().parent
+            base_dir = resource_path()
             
             # Check for multiple possible extensions/names
             possible_names = ["cat_gatekeeper.gif", "cat_gatekeeper"]
@@ -1316,8 +1336,7 @@ class PostureSpineCanvas(ctk.CTkCanvas):
                 self._render_warped_spine()
 
     def _load_wireframe_asset(self):
-        base_dir = Path(__file__).resolve().parent
-        asset_path = base_dir / "assets" / "posture_wireframe.png"
+        asset_path = resource_path("assets", "posture_wireframe.png")
         if asset_path.exists():
             try:
                 bgr = cv2.imread(str(asset_path))
@@ -2386,8 +2405,8 @@ class Vision360App(ctk.CTk):
         self._pending_flash   = None                  # latest (color, duration_ms)
         
         # ── User Profile & Gamification State (Multi-User Workstation Support) ─
-        self._profile_path     = Path(__file__).resolve().parent / "vision360_profile.json"
-        self._profiles_path    = Path(__file__).resolve().parent / "vision360_profiles.json"
+        self._profile_path     = user_data_dir() / "vision360_profile.json"
+        self._profiles_path    = user_data_dir() / "vision360_profiles.json"
         self._profiles_db      = {"active_id": "default", "profiles": {}}
         self._active_profile_id = "default"
         self._switcher_dialog   = None
@@ -2479,8 +2498,8 @@ class Vision360App(ctk.CTk):
         if Image is None:
             return None
         candidate_paths = [
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), "vision360_logo.png"),
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), "image_c6369846.png"),
+            str(resource_path("vision360_logo.png")),
+            str(resource_path("image_c6369846.png")),
             "vision360_logo.png",
             "image_c6369846.png",
             os.path.join(os.getcwd(), "public", "assets", "aistudio", "vision360_logo.png"),
@@ -4768,8 +4787,7 @@ class Vision360App(ctk.CTk):
         self._start_wellness_sync()
 
     def _camera_loop(self):
-        BASE_DIR = Path(__file__).resolve().parent
-        TASK_PATH = BASE_DIR / "face_landmarker.task"
+        TASK_PATH = resource_path("face_landmarker.task")
         
         options = mp.tasks.vision.FaceLandmarkerOptions(
             base_options=mp.tasks.BaseOptions(model_asset_path=str(TASK_PATH)),

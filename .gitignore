@@ -15,3 +15,12 @@ __pycache__/
 
 # Logs
 *.log
+
+# Build output
+build/
+dist/
+*.spec.bak
+
+# Personal profile data (now stored in %APPDATA%\Vision360 at runtime)
+vision360_profile.json
+vision360_profiles.json
