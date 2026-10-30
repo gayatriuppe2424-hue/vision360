@@ -1,0 +1,101 @@
+{
+  "active_id": "user_1793383053947",
+  "profiles": {
+    "user_default": {
+      "name": "Gayatri",
+      "xp": 1265,
+      "preset": "Custom",
+      "settings": {
+        "sensitivity": 0.2,
+        "smoothing": 0.7,
+        "mouth_thresh": 0.4,
+        "scroll_speed": 420,
+        "dwell_time": 0.96,
+        "dwell_radius": 25,
+        "ear_close_thresh": 0.19,
+        "ear_reopen_thresh": 0.23,
+        "ear_baseline": 0.28,
+        "eye_width_cm": 9.0
+      },
+      "first_run": "2026-10-30",
+      "active_dates": [
+        "2026-10-30"
+      ],
+      "lifetime_clicks": 163,
+      "lifetime_blinks": 705,
+      "hands_free_secs": 946.2,
+      "posture_good_secs": 3570.1,
+      "posture_total_secs": 5197.0,
+      "daily": {
+        "date": "2026-10-30",
+        "breaks": 5,
+        "good_secs": 3570.1,
+        "total_secs": 5197.0
+      }
+    },
+    "guest_mode": {
+      "name": "Guest User",
+      "xp": 0,
+      "preset": "Default",
+      "settings": {
+        "sensitivity": 0.25,
+        "smoothing": 0.5,
+        "mouth_thresh": 0.4,
+        "scroll_speed": 360,
+        "dwell_time": 1.0,
+        "dwell_radius": 25,
+        "ear_close_thresh": 0.19,
+        "ear_reopen_thresh": 0.23,
+        "ear_baseline": 0.28,
+        "eye_width_cm": 9.0
+      },
+      "first_run": "2026-10-30",
+      "active_dates": [
+        "2026-10-30"
+      ],
+      "lifetime_clicks": 0,
+      "lifetime_blinks": 38,
+      "hands_free_secs": 0.0,
+      "posture_good_secs": 196.1,
+      "posture_total_secs": 196.1,
+      "daily": {
+        "date": "2026-10-30",
+        "breaks": 4,
+        "good_secs": 196.1,
+        "total_secs": 196.1
+      }
+    },
+    "user_1793383053947": {
+      "name": "gg",
+      "xp": 0,
+      "preset": "Casual Browsing & Web",
+      "settings": {
+        "sensitivity": 0.2,
+        "smoothing": 0.7,
+        "mouth_thresh": 0.414,
+        "scroll_speed": 420,
+        "dwell_time": 1.0,
+        "dwell_radius": 25,
+        "ear_close_thresh": 0.19,
+        "ear_reopen_thresh": 0.23,
+        "ear_baseline": 0.28,
+        "eye_width_cm": 9.0
+      },
+      "first_run": "2026-10-30",
+      "active_dates": [
+        "2026-10-30"
+      ],
+      "lifetime_clicks": 15,
+      "lifetime_blinks": 26,
+      "hands_free_secs": 88.6,
+      "posture_good_secs": 229.4,
+      "posture_total_secs": 234.0,
+      "daily": {
+        "date": "2026-10-30",
+        "breaks": 0,
+        "good_secs": 229.4,
+        "total_secs": 234.0
+      }
+    }
+  }
+}
